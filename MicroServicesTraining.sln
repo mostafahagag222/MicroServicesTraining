@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionService", "AuctionService\AuctionService.csproj", "{0A0D4A92-8781-49D6-BAD9-DE4E33276FDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\Carsties-2024-main\Carsties-2024-main\src\Contracts\Contracts.csproj", "{A0CA997F-824C-4BEF-9E79-A07C20045E43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A0D4A92-8781-49D6-BAD9-DE4E33276FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0D4A92-8781-49D6-BAD9-DE4E33276FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0D4A92-8781-49D6-BAD9-DE4E33276FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0D4A92-8781-49D6-BAD9-DE4E33276FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CA997F-824C-4BEF-9E79-A07C20045E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CA997F-824C-4BEF-9E79-A07C20045E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CA997F-824C-4BEF-9E79-A07C20045E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CA997F-824C-4BEF-9E79-A07C20045E43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
