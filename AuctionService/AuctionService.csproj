@@ -20,10 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Carsties-2024-main\Carsties-2024-main\src\Contracts\Contracts.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Services\" />
     </ItemGroup>
 
