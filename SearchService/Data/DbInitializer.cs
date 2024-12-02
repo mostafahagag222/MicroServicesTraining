@@ -21,8 +21,8 @@ public static class DbInitializer
             return;
         else
         {
-            var jsonItems = await File.ReadAllTextAsync("Auctions.json");
-            var items = JsonSerializer.Deserialize<List<Item>>(jsonItems);
+            var jsonItems = await File.ReadAllTextAsync("data/Auctions.json");
+            var items = JsonSerializer.Deserialize<List<Item>>(jsonItems,new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             await DB.SaveAsync(items);
         }
     }
