@@ -1,39 +1,24 @@
-﻿using AuctionService.Data;
-using AuctionService.DTOs;
+﻿using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Contracts;
-using MassTransit;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuctionService.Controllers;
 
 [ApiController]
 [Route("api/auctions")]
-public class AuctionsController : ControllerBase
+public class AuctionsController(IAuctionRepository repo, IMapper mapper) : ControllerBase
 {
-    private readonly IAuctionRepository _repo;
-    private readonly IMapper _mapper;
-
-    public AuctionsController(IAuctionRepository repo, IMapper mapper)
-    {
-        _repo = repo;
-        _mapper = mapper;
-    }
-
     [HttpGet]
     public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string date)
     {
-        return await _repo.GetAuctionsAsync(date);
+        return await repo.GetAuctionsAsync(date);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<AuctionDto>> GetAuctionById(Guid id)
     {
-        var auction = await _repo.GetAuctionByIdAsync(id);
+        var auction = await repo.GetAuctionByIdAsync(id);
 
         if (auction == null) return NotFound();
 
@@ -43,15 +28,15 @@ public class AuctionsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto auctionDto)
     {
-        var auction = _mapper.Map<Auction>(auctionDto);
+        var auction = mapper.Map<Auction>(auctionDto);
 
         auction.Seller = "Hagag";
 
-        _repo.AddAuction(auction);
+        repo.AddAuction(auction);
 
-        var newAuction = _mapper.Map<AuctionDto>(auction);
+        var newAuction = mapper.Map<AuctionDto>(auction);
 
-        var result = await _repo.SaveChangesAsync();
+        var result = await repo.SaveChangesAsync();
 
         if (!result) return BadRequest("Could not save changes to the DB");
 
@@ -62,7 +47,7 @@ public class AuctionsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
-        var auction = await _repo.GetAuctionEntityById(id);
+        var auction = await repo.GetAuctionEntityById(id);
 
         if (auction == null) return NotFound();
 
@@ -74,7 +59,7 @@ public class AuctionsController : ControllerBase
         auction.Item.Year = updateAuctionDto.Year ?? auction.Item.Year;
 
 
-        var result = await _repo.SaveChangesAsync();
+        var result = await repo.SaveChangesAsync();
 
         if (result) return Ok();
 
@@ -84,14 +69,14 @@ public class AuctionsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAuction(Guid id)
     {
-        var auction = await _repo.GetAuctionEntityById(id);
+        var auction = await repo.GetAuctionEntityById(id);
 
         if (auction == null) return NotFound();
 
-        _repo.RemoveAuction(auction);
+        repo.RemoveAuction(auction);
 
 
-        var result = await _repo.SaveChangesAsync();
+        var result = await repo.SaveChangesAsync();
 
         if (!result) return BadRequest("Could not update DB");
 
